@@ -11,7 +11,7 @@ public class PipesManager : MonoBehaviour
     public float interval;
 
     private float currentTime = 0f;
-    private int idade;
+
 
 
     void Start()
