@@ -7,14 +7,11 @@ public class Bird : MonoBehaviour
     public Rigidbody2D rig;
     public float jumpForce;
     
-
-    // Start is called before the first frame update
     void Start()
     {
         rig.bodyType = RigidbodyType2D.Static;
     }
 
-    // Update is called once per frame
     void Update()
     {
         switch (GameManager.instance.status)
@@ -30,15 +27,15 @@ public class Bird : MonoBehaviour
                 break;
         }
     }
+    public void StartGame()
+    {
+        rig.bodyType = RigidbodyType2D.Dynamic;
+        Jump();
+    }
 
     void StartUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameManager.instance.StartGame();
-            rig.bodyType = RigidbodyType2D.Dynamic;
-            Jump();
-        }
+       
     }
 
     void PlayUpdate()
