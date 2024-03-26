@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,13 @@ public class Bird : MonoBehaviour
 {
     public Rigidbody2D rig;
     public float jumpForce;
-    
+    private Vector3 StartPosition;
+
+
     void Start()
     {
         rig.bodyType = RigidbodyType2D.Static;
+        StartPosition = transform.position;
     }
 
     void Update()
@@ -61,4 +65,9 @@ public class Bird : MonoBehaviour
         GameManager.instance.GameOver();
     }
 
+   public void Restart()
+    {
+        transform.position = StartPosition;
+        rig.bodyType = RigidbodyType2D.Static;
+    }
 }

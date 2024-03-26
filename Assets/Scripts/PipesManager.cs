@@ -16,7 +16,7 @@ public class PipesManager : MonoBehaviour
 
     void Start()
     {
-  
+        currentTime = interval;
     }
 
 
@@ -30,6 +30,7 @@ public class PipesManager : MonoBehaviour
                 PlayUpdate();
                 break;
             case GameStatus.GameOver:
+
                 break;
         }
 
@@ -46,11 +47,22 @@ public class PipesManager : MonoBehaviour
     }
     void CreatePipe()
     {
-        var pipeGameObject = Instantiate(pipeModel, spawnPoint.position, Quaternion.identity);
+        
+        var pipeGameObject = Instantiate(pipeModel, transform);
         var pipeTransform = pipeGameObject.GetComponent<Transform>();
+        
         float y = Random.Range(-1.26f, 0.26f);
+        
         pipeTransform.position = new Vector3(spawnPoint.position.x, y, 0);    
     
 
+    }
+    public void Restart()
+    {
+        currentTime = interval;
+        while (transform.childCount > 0)
+        {
+            DestroyImmediate(transform.GetChild(0).gameObject);
+        }
     }
 }
