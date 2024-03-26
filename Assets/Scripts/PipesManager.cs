@@ -21,15 +21,28 @@ public class PipesManager : MonoBehaviour
 
 
     void Update()
-    
+    {
+        switch (GameManager.instance.status)
+        {
+            case GameStatus.Start:
+                break;
+            case GameStatus.Play:
+                PlayUpdate();
+                break;
+            case GameStatus.GameOver:
+                break;
+        }
+
+    }
+    void PlayUpdate()
     {
         currentTime += Time.deltaTime;
         if (currentTime > interval)
-         { 
+        {
             CreatePipe();
             currentTime = 0f;
-         }
- 
+        }
+
     }
     void CreatePipe()
     {

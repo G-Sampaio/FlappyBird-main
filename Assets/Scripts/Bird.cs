@@ -23,9 +23,9 @@ public class Bird : MonoBehaviour
                 PlayUpdate();
                 break;
             case GameStatus.GameOver:
-                GameOverUpdate();
                 break;
         }
+
     }
     public void StartGame()
     {
