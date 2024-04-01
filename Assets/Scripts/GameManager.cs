@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         status = GameStatus.GameOver;
+       
     }
     void GameOverUpdate()
     {
@@ -77,7 +78,6 @@ public class GameManager : MonoBehaviour
         status = GameStatus.Start;
         bird.Restart();
         pipesManager.Restart();
-        
 
     }
 }

@@ -68,6 +68,7 @@ public class Bird : MonoBehaviour
    public void Restart()
     {
         transform.position = StartPosition;
+        transform.rotation = Quaternion.identity;
         rig.bodyType = RigidbodyType2D.Static;
     }
 }
