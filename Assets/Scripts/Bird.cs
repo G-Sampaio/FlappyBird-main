@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Bird : MonoBehaviour
@@ -8,6 +9,7 @@ public class Bird : MonoBehaviour
     public Rigidbody2D rig;
     public float jumpForce;
     private Vector3 StartPosition;
+    public Animator animator;
 
 
     void Start()
@@ -63,6 +65,7 @@ public class Bird : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameManager.instance.GameOver();
+        animator.SetBool("IsAlive", false);
     }
 
    public void Restart()
@@ -70,5 +73,7 @@ public class Bird : MonoBehaviour
         transform.position = StartPosition;
         transform.rotation = Quaternion.identity;
         rig.bodyType = RigidbodyType2D.Static;
+        animator.SetBool("IsAlive", true);
     }
+
 }
