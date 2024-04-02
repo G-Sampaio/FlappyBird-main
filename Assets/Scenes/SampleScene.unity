@@ -426,6 +426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rig: {fileID: 541881063}
   jumpForce: 3.5
+  animator: {fileID: 541881066}
 --- !u!95 &541881066
 Animator:
   serializedVersion: 5
