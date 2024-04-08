@@ -1,6 +1,10 @@
+
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using System.Runtime.CompilerServices;
+
 public enum GameStatus
 {
     Start,
@@ -14,6 +18,8 @@ public class GameManager : MonoBehaviour
     
     public Bird bird;
     public PipesManager pipesManager;
+    public Image startImage;
+    public Image gameOverImage;
     
 
 
@@ -30,8 +36,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+       
 
-
+    }
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+        startImage.enabled = true;
+        gameOverImage.enabled = false;
     }
     private void Update()
     {
@@ -58,11 +70,14 @@ public class GameManager : MonoBehaviour
     {
         status = GameStatus.Play;
         bird.StartGame();
+        startImage.enabled = false;
+
 
     }
     public void GameOver()
     {
         status = GameStatus.GameOver;
+        gameOverImage.enabled = true;
        
     }
     void GameOverUpdate()
@@ -78,6 +93,8 @@ public class GameManager : MonoBehaviour
         status = GameStatus.Start;
         bird.Restart();
         pipesManager.Restart();
+        startImage.enabled = true;
+        gameOverImage.enabled = false;
 
     }
 }
