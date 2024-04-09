@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Runtime.CompilerServices;
+using TMPro;
 
 public enum GameStatus
 {
@@ -20,6 +21,10 @@ public class GameManager : MonoBehaviour
     public PipesManager pipesManager;
     public Image startImage;
     public Image gameOverImage;
+    public TMP_Text scoreText;
+    int score = 0;
+
+
     
 
 
@@ -95,6 +100,17 @@ public class GameManager : MonoBehaviour
         pipesManager.Restart();
         startImage.enabled = true;
         gameOverImage.enabled = false;
+        score = 0;
+        ScoreTextUpdate();
+    }
+    public void addScore()
+    {
+        score++;
+        ScoreTextUpdate();
+    }
+    private void ScoreTextUpdate()
 
+    {
+        scoreText.text = "Score: "+score.ToString();
     }
 }
