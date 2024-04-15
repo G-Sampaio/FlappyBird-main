@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public Image gameOverImage;
     public TMP_Text scoreText;
     int score = 0;
-
+    private float gameOverTime = 0f;
 
     
 
@@ -87,9 +87,16 @@ public class GameManager : MonoBehaviour
     }
     void GameOverUpdate()
     {
+        gameOverTime += Time.deltaTime;
+
         if (Input.GetMouseButtonDown(0))
         {
-            Restart();
+            if (gameOverTime > 1)
+            {
+                Restart();
+ 
+            }
+      
         }
     }
     void Restart()
@@ -101,7 +108,9 @@ public class GameManager : MonoBehaviour
         startImage.enabled = true;
         gameOverImage.enabled = false;
         score = 0;
+        gameOverTime = 0;
         ScoreTextUpdate();
+        
     }
     public void addScore()
     {
