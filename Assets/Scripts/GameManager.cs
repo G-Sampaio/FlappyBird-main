@@ -22,12 +22,11 @@ public class GameManager : MonoBehaviour
     public Image startImage;
     public Image gameOverImage;
     public TMP_Text scoreText;
+    public TMP_Text BestScoreText;
     int score = 0;
     private float gameOverTime = 0f;
-
-    
-
-
+    private string bestScoreKey = "bestScore";
+    private int bestScore = 0;
 
     private void Awake()
     {
@@ -41,14 +40,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-       
-
     }
     private void Start()
     {
         Application.targetFrameRate = 60;
         startImage.enabled = true;
         gameOverImage.enabled = false;
+        BestScoreText.enabled = true;
+        scoreText.enabled = true;
+        bestScore = PlayerPrefs.GetInt(bestScoreKey);
+        BestScoreTextUpdate();
     }
     private void Update()
     {
@@ -76,14 +77,19 @@ public class GameManager : MonoBehaviour
         status = GameStatus.Play;
         bird.StartGame();
         startImage.enabled = false;
-
-
+        scoreText.enabled = true;
+        BestScoreText.enabled = false;
     }
     public void GameOver()
     {
         status = GameStatus.GameOver;
         gameOverImage.enabled = true;
-       
+        scoreText.enabled = true;
+        BestScoreText.enabled = true;
+        if (score > bestScore)
+            bestScore = score;
+            PlayerPrefs.SetInt(bestScoreKey, bestScore);
+            BestScoreTextUpdate();
     }
     void GameOverUpdate()
     {
@@ -101,7 +107,6 @@ public class GameManager : MonoBehaviour
     }
     void Restart()
     {
-        
         status = GameStatus.Start;
         bird.Restart();
         pipesManager.Restart();
@@ -109,8 +114,9 @@ public class GameManager : MonoBehaviour
         gameOverImage.enabled = false;
         score = 0;
         gameOverTime = 0;
-        ScoreTextUpdate();
-        
+        scoreText.enabled = false;
+        BestScoreText.enabled = true;
+        ScoreTextUpdate(); 
     }
     public void addScore()
     {
@@ -121,5 +127,9 @@ public class GameManager : MonoBehaviour
 
     {
         scoreText.text = "Score: "+score.ToString();
+    }
+    private void BestScoreTextUpdate()
+    {
+        BestScoreText.text = "Best:" + bestScore.ToString();
     }
 }
